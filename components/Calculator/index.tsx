@@ -6,7 +6,6 @@ import React, {
   useEffect,
   useState,
   useCallback,
-  useRef,
 } from 'react';
 
 import InputGroup from '@/components/InputGroup';
@@ -15,8 +14,6 @@ import { calculateConversion, isXDaysOld, relativeTime } from '@/lib/utils';
 import { Rates } from '@/lib/types';
 
 function Calculator() {
-  const isMounted = useRef(false);
-
   const [baseCurrency, setBaseCurrency] = useState('USD');
   const [targetCurrency, setTargetCurrency] = useState('INR');
 
@@ -26,10 +23,6 @@ function Calculator() {
   const [loading, setLoading] = useState(true);
   const [rates, setRates] = useState({} as Rates);
   const [lastUpdateTimestamp, setLastUpdateTimestamp] = useState('');
-
-  console.log('DEBUG:', 9);
-  console.log('rates:', rates);
-  console.log('loading:', loading);
 
   const [action, setAction] = useState('');
 
@@ -63,10 +56,6 @@ function Calculator() {
   );
 
   const fetchRates = useCallback(async () => {
-    console.log(
-      'FETCHRATES#####################################################:',
-    );
-
     setLoading(true);
 
     const data = await getConversionRates();
@@ -77,20 +66,9 @@ function Calculator() {
   }, []);
 
   useEffect(() => {
-    console.log('useEffect', 1);
-
-    console.log('useEffect', 2, isMounted.current);
-
-    console.log('calling fetchRates');
     fetchRates();
-
-    isMounted.current = true;
-
-    console.log('useEffect', 3);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log('isMounted.current:', isMounted.current);
 
   useEffect(() => {
     if (action === 'base-to-target') {
