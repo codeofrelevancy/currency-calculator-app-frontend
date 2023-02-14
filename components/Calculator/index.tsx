@@ -10,6 +10,9 @@ import {
   relativeTime,
 } from '@/lib/utils';
 import { Rates } from '@/lib/types';
+import { doc, getDoc } from 'firebase/firestore';
+
+import { db } from '@/firebase';
 
 export default function Calculator() {
   const [baseCurrency, setBaseCurrency] = useState('USD');
@@ -62,9 +65,20 @@ export default function Calculator() {
       async function fetchRates() {
         setLoading(true);
 
-        const data = await getConversionRates();
-        setRates(data?.rates as Rates);
-        setLastUpdateTimestamp(data?.timestamp);
+        try {
+          console.log('DB:', db);
+          
+          const docRef = doc(db, 'currency', 'conversion_rates');
+          console.log('docRef:', docRef);
+          const docSnap = await getDoc(docRef);
+          console.log('docSnap:', docSnap);
+          
+          const data = docSnap.data();
+          setRates(data?.rates as Rates);
+          setLastUpdateTimestamp(data?.timestamp);
+        } catch (error) {
+          console.log(error);
+        }
 
         setLoading(false);
       }
