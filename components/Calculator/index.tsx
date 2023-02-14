@@ -24,7 +24,7 @@ export default function Calculator() {
   const [rates, setRates] = useState({} as Rates);
   const [lastUpdateTimestamp, setLastUpdateTimestamp] = useState('');
 
-  console.log('DEBUG:', 3);
+  console.log('DEBUG:', 4);
   console.log('rates:', rates);
   console.log('loading:', loading);
 
@@ -60,6 +60,8 @@ export default function Calculator() {
   );
 
   useEffect(() => {
+    console.log('useEffect');
+    
     async function fetchRates() {
       console.log('FETCHRATES#####################################################:');
       
@@ -71,13 +73,16 @@ export default function Calculator() {
 
       setLoading(false);
     }
-
+    
     if (isMounted.current) {
+      console.log('calling fetchRates');
       fetchRates();
     }
 
     isMounted.current = true;
   }, []);
+
+  console.log('isMounted.current:', isMounted.current);
 
   useEffect(() => {
     if (action === 'base-to-target') {
