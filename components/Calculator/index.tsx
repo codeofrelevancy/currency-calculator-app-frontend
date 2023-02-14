@@ -62,8 +62,12 @@ export default function Calculator() {
   );
 
   useEffect(() => {
+    console.log('useEffect', 1);
+    
     return () => {
+      console.log('useEffect', 2);
       async function fetchRates() {
+        console.log('useEffect', 3);
         setLoading(true);
 
         try {
@@ -77,6 +81,8 @@ export default function Calculator() {
           const data = docSnap.data();
           setRates(data?.rates as Rates);
           setLastUpdateTimestamp(data?.timestamp);
+
+          console.log('useEffect', 4);
         } catch (error) {
           console.log(error);
         }
@@ -84,7 +90,9 @@ export default function Calculator() {
         setLoading(false);
       }
 
+      console.log('useEffect', 5);
       fetchRates();
+      console.log('useEffect', 6);
     };
   }, []);
 
