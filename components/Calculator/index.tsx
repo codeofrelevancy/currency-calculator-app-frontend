@@ -1,6 +1,7 @@
 'use client';
 
 import React, {
+  memo,
   ChangeEvent,
   useEffect,
   useState,
@@ -13,7 +14,7 @@ import { getConversionRates } from '@/lib/currency';
 import { calculateConversion, isXDaysOld, relativeTime } from '@/lib/utils';
 import { Rates } from '@/lib/types';
 
-export default function Calculator() {
+function Calculator() {
   const isMounted = useRef(false);
 
   const [baseCurrency, setBaseCurrency] = useState('USD');
@@ -26,7 +27,7 @@ export default function Calculator() {
   const [rates, setRates] = useState({} as Rates);
   const [lastUpdateTimestamp, setLastUpdateTimestamp] = useState('');
 
-  console.log('DEBUG:', 8);
+  console.log('DEBUG:', 9);
   console.log('rates:', rates);
   console.log('loading:', loading);
 
@@ -61,18 +62,16 @@ export default function Calculator() {
     [],
   );
 
-  const fetchRates = useCallback(() => {
+  const fetchRates = useCallback(async () => {
     console.log(
       'FETCHRATES#####################################################:',
     );
 
     setLoading(true);
 
-    // const data = await getConversionRates();
-    // setRates(data?.rates as Rates);
-    // setLastUpdateTimestamp(data?.timestamp);
-    setRates({} as Rates);
-    setLastUpdateTimestamp('');
+    const data = await getConversionRates();
+    setRates(data?.rates as Rates);
+    setLastUpdateTimestamp(data?.timestamp);
 
     setLoading(false);
   }, []);
@@ -88,7 +87,7 @@ export default function Calculator() {
     isMounted.current = true;
 
     console.log('useEffect', 3);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log('isMounted.current:', isMounted.current);
@@ -180,3 +179,5 @@ export default function Calculator() {
     </div>
   );
 }
+
+export default memo(Calculator);
