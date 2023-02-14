@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ChangeEvent, useEffect, useState, useCallback } from 'react';
+import React, { ChangeEvent, useEffect, useState, useCallback, useRef } from 'react';
 
 import InputGroup from '@/components/InputGroup';
 import { getConversionRates } from '@/lib/currency';
@@ -10,11 +10,10 @@ import {
   relativeTime,
 } from '@/lib/utils';
 import { Rates } from '@/lib/types';
-import { doc, getDoc } from 'firebase/firestore';
-
-import { db } from '@/firebase';
 
 export default function Calculator() {
+  const isMounted = useRef(false);
+
   const [baseCurrency, setBaseCurrency] = useState('USD');
   const [targetCurrency, setTargetCurrency] = useState('INR');
 
@@ -25,10 +24,9 @@ export default function Calculator() {
   const [rates, setRates] = useState({} as Rates);
   const [lastUpdateTimestamp, setLastUpdateTimestamp] = useState('');
 
-  console.log('DEBUG:', 1);
+  console.log('DEBUG:', 3);
   console.log('rates:', rates);
   console.log('loading:', loading);
-  
 
   const [action, setAction] = useState('');
 
@@ -62,38 +60,23 @@ export default function Calculator() {
   );
 
   useEffect(() => {
-    console.log('useEffect', 1);
-    
-    return () => {
-      console.log('useEffect', 2);
-      async function fetchRates() {
-        console.log('useEffect', 3);
-        setLoading(true);
+    async function fetchRates() {
+      console.log('FETCHRATES#####################################################:');
+      
+      setLoading(true);
 
-        try {
-          console.log('DB:', db);
-          
-          const docRef = doc(db, 'currency', 'conversion_rates');
-          console.log('docRef:', docRef);
-          const docSnap = await getDoc(docRef);
-          console.log('docSnap:', docSnap);
-          
-          const data = docSnap.data();
-          setRates(data?.rates as Rates);
-          setLastUpdateTimestamp(data?.timestamp);
+      const data = await getConversionRates();
+      setRates(data?.rates as Rates);
+      setLastUpdateTimestamp(data?.timestamp);
 
-          console.log('useEffect', 4);
-        } catch (error) {
-          console.log(error);
-        }
+      setLoading(false);
+    }
 
-        setLoading(false);
-      }
-
-      console.log('useEffect', 5);
+    if (isMounted.current) {
       fetchRates();
-      console.log('useEffect', 6);
-    };
+    }
+
+    isMounted.current = true;
   }, []);
 
   useEffect(() => {
