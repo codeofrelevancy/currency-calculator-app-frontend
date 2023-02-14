@@ -1,14 +1,16 @@
 'use client';
 
-import React, { ChangeEvent, useEffect, useState, useCallback, useRef } from 'react';
+import React, {
+  ChangeEvent,
+  useEffect,
+  useState,
+  useCallback,
+  useRef,
+} from 'react';
 
 import InputGroup from '@/components/InputGroup';
 import { getConversionRates } from '@/lib/currency';
-import {
-  calculateConversion,
-  isXDaysOld,
-  relativeTime,
-} from '@/lib/utils';
+import { calculateConversion, isXDaysOld, relativeTime } from '@/lib/utils';
 import { Rates } from '@/lib/types';
 
 export default function Calculator() {
@@ -24,7 +26,7 @@ export default function Calculator() {
   const [rates, setRates] = useState({} as Rates);
   const [lastUpdateTimestamp, setLastUpdateTimestamp] = useState('');
 
-  console.log('DEBUG:', 7);
+  console.log('DEBUG:', 8);
   console.log('rates:', rates);
   console.log('loading:', loading);
 
@@ -59,33 +61,34 @@ export default function Calculator() {
     [],
   );
 
+  const fetchRates = useCallback(() => {
+    console.log(
+      'FETCHRATES#####################################################:',
+    );
+
+    setLoading(true);
+
+    // const data = await getConversionRates();
+    // setRates(data?.rates as Rates);
+    // setLastUpdateTimestamp(data?.timestamp);
+    setRates({} as Rates);
+    setLastUpdateTimestamp('');
+
+    setLoading(false);
+  }, []);
+
   useEffect(() => {
     console.log('useEffect', 1);
-    
-    function fetchRates() {
-      console.log('FETCHRATES#####################################################:');
-      
-      setLoading(true);
-
-      // const data = await getConversionRates();
-      // setRates(data?.rates as Rates);
-      // setLastUpdateTimestamp(data?.timestamp);
-      setRates({} as Rates);
-      setLastUpdateTimestamp('');
-
-      setLoading(false);
-    }
 
     console.log('useEffect', 2, isMounted.current);
-    
-    if (isMounted.current) {
-      console.log('calling fetchRates');
-      fetchRates();
-    }
+
+    console.log('calling fetchRates');
+    fetchRates();
 
     isMounted.current = true;
 
     console.log('useEffect', 3);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log('isMounted.current:', isMounted.current);
@@ -120,9 +123,9 @@ export default function Calculator() {
           <div className="h-10 bg-slate-700 rounded"></div>
         </div>
         <div className="flex justify-between flex-row space-x-20 mt-4">
-            <div className="h-5 bg-slate-700 rounded w-full"></div>
-            <div className="h-5 bg-slate-700 rounded w-full"></div>
-          </div>
+          <div className="h-5 bg-slate-700 rounded w-full"></div>
+          <div className="h-5 bg-slate-700 rounded w-full"></div>
+        </div>
       </div>
     );
   }
