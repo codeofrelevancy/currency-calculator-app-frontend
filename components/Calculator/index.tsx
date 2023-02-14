@@ -25,6 +25,7 @@ export default function Calculator() {
   const [rates, setRates] = useState({} as Rates);
   const [lastUpdateTimestamp, setLastUpdateTimestamp] = useState('');
 
+  console.log('DEBUG:', 1);
   console.log('rates:', rates);
   console.log('loading:', loading);
   
