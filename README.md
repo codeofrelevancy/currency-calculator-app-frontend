@@ -1,6 +1,6 @@
 # Getting Started
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Installation
 
@@ -46,7 +46,7 @@ API: [APILayer](https://apilayer.com/marketplace/exchangerates_data-api)
 Frontend deployment: [Vercel](https://vercel.com)
 Backend deployment: [Render](https://render.com)
 
-Note: Backend code is available in /backend directory under this repository.
+Note: Backend code is available in [this repository](https://github.com/codeofrelevancy/currency-calculator-app-backend).
 
 ## How does this application work?
 
@@ -61,6 +61,10 @@ To make it even easier for users to see at a glance whether the conversion rates
 This feature helps ensure that users always have access to the most accurate and current conversion rates, making the application a reliable and trustworthy tool for all of their currency conversion needs.
 
 This application is designed to be simple and easy to use, with a clean and intuitive interface that makes it easy for users to convert currencies on the go. With its reliable backend server and up-to-date conversion rates, users can trust that they are getting accurate and current information every time they use the tool.
+
+## Deploy Any Next.js App to Vercel for FREE
+
+[Watch YouTube Tutorial](https://youtu.be/Dtpnai6FjcM)
 
 ## Headline
 
