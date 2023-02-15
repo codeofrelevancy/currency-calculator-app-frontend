@@ -5,7 +5,7 @@ import Calculator from '@/components/Calculator';
 function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-50 to-gray-200 flex flex-col justify-center sm:py-12">
-      <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-xl">
+      <div className="p-3 md:p-10 xs:p-0 mx-auto md:w-full md:max-w-xl">
         <h1 className="font-bold text-center text-2xl mb-5">
           Currency Calculator
         </h1>
@@ -14,7 +14,7 @@ function Home() {
 
           <Calculator />
 
-          <p className="font-md text-slate-500 mb-2 p-5">
+          <p className="font-md text-slate-500 mb-2 py-5 px-2 md:px-5 text-xs md:text-sm">
             <a
               href="https://www.youtube.com/@codeofrelevancy"
               target="_blank"

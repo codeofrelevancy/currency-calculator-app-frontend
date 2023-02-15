@@ -27,7 +27,7 @@ export default function InputGroup({
           <label className="sr-only">Currency</label>
           <select
             name={selectName}
-            className="h-full rounded-md border-none bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:border-none ring-0 focus:ring-0 sm:text-sm"
+            className="h-full rounded-md border-none bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:border-none ring-0 focus:ring-0 text-xs md:text-sm text-right md:text-left"
             value={selectedCurrency}
             onChange={onSelect}
           >

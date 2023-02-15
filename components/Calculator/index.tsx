@@ -94,7 +94,7 @@ function Calculator() {
 
   if (loading) {
     return (
-      <div className="px-5 pt-7 pb-4 w-full mx-auto animate-pulse">
+      <div className="px-2 md:px-5 pt-7 pb-4 w-full mx-auto animate-pulse">
         <div className="space-y-4">
           <div className="h-10 bg-slate-700 rounded"></div>
           <div className="h-10 bg-slate-700 rounded"></div>
@@ -108,7 +108,7 @@ function Calculator() {
   }
 
   return (
-    <div className="px-5 pt-7 pb-4">
+    <div className="px-2 md:px-5 pt-7 pb-4">
       <span
         className={`animate-ping absolute -right-1 -top-1 h-3 w-3 rounded-full ${
           isXDaysOld(lastUpdateTimestamp, 1) ? 'bg-red-600' : 'bg-green-600'
@@ -137,7 +137,7 @@ function Calculator() {
       </div>
 
       {rates && (
-        <div className="flex justify-between items-center text-xs text-slate-500">
+        <div className="flex flex-col md:flex-row md:justify-between items-center text-xs text-slate-500">
           <p>
             {`1 ${baseCurrency} equals ${calculateConversion(
               1,
