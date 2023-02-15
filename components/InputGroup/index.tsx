@@ -19,7 +19,7 @@ export default function InputGroup({
           name={name}
           className="block w-full rounded-md border-gray-300 pl-3 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           placeholder="0.00"
-          value={value}
+          value={value || ''}
           onChange={onChange}
           autoComplete="off"
         />

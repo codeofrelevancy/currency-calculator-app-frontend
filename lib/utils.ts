@@ -4,12 +4,14 @@ export function calculateConversion(
   currency: string,
   rates: { [key: string]: number },
 ) {
-  if (!isNumber(amount)) {
+  const value: any = toNumber(amount);
+
+  if (!value || !isNumber(value)) {
     return '';
   }
 
   return formatPrice(
-    (parseFloat(amount) * rates[currency]) / rates[baseCurrency],
+    (parseFloat(value) * rates[currency]) / rates[baseCurrency],
   );
 }
 
@@ -18,6 +20,14 @@ export function formatPrice(price: any) {
   return formattedPrice > 0
     ? formattedPrice.toLocaleString()
     : parseFloat(price).toFixed(10);
+}
+
+export function toNumber(value: any) {
+  const number = parseFloat(`${value}`.replace(/[^0-9.]/g, ''));
+  if (Number.isNaN(number)) {
+    return 0;
+  }
+  return number;
 }
 
 const regex = /^[-+]?\d+(\.\d+)?$/;
