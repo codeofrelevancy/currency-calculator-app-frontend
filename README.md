@@ -1,6 +1,6 @@
 # Getting Started
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Installation
 
@@ -46,7 +46,7 @@ API: [APILayer](https://apilayer.com/marketplace/exchangerates_data-api)
 Frontend deployment: [Vercel](https://vercel.com)
 Backend deployment: [Render](https://render.com)
 
-Note: Backend code is available in /backend directory under this repository.
+Note: Backend code is available in [this repository](https://github.com/codeofrelevancy/currency-calculator-app-backend).
 
 ## How does this application work?
 
